@@ -17,16 +17,49 @@ public class GerenciaPlaylist {
         do{
             op = parseInt(showInputDialog(menu));
             switch(op){
-                case 1:
+                case 1:{
                     //1.Pegar os dados da música
-                    String titulo = showInputDialog("Digite o nome da faixa:\n", menu);
+                    String titulo = showInputDialog("Digite o nome da faixa:\n");
                     //2.Contruir um objeto música
                     var musica = new Musica(titulo);
                     //3.Adicionar música na colecão com add
                     musicas.add(musica);
                     //4.Avisar o usuário que deu certo
                     showMessageDialog(null, "Concluido");
-                break;
+                    break;
+                }
+                case 2:{
+                    var sb = new StringBuilder("");
+                    Collections.sort(musicas); // in-place
+                    //for each ou enhanced  for (C#: foreach)
+                    for (Musica m : musicas) {
+                        sb
+                        .append(m)
+                        .append("\n")
+                        .append("******************************")
+                        .append("\n");
+                    }
+                    /*refaça com for normal
+                    for(int i = 0;i < musicas.size( ); i++){
+                        sb.append(musicas.get(i + 1))
+                        .append("\n")
+                        .append("***************");
+                    }*/
+                    showMessageDialog(null,sb); //[t1, t2, t3]
+                    break;
+                }
+                case 3:{
+                    //Comparar por avavaliação
+                    Collections.sort(musicas, new ComparadorPorTitulo());
+                    var sb = new StringBuilder("");
+                    for (Musica m : musicas) {
+                        sb
+                        .append(m)
+                        .append("\n")
+                        .append("******************************")
+                        .append("\n");
+                    }
+                }
             }
         }while (op != 0);
         
